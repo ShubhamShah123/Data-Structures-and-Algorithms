@@ -75,14 +75,25 @@ algorithms using Stack data strcuture.
     - `22_min_stack.py`:
       Calculating the minimum from the stack WITHOUT extra space.
 
-### TODO:
-What is to be done and what's left.
+    - `23_NGR_Freq.py`:
+      Nearest Greater element to right with the frequency greather then the current element
+
+    - `24_iterative_TOH.py`:
+      Iterative version of Tower of Hanoi
+
+    - `25_sorting_stack_extra_space.py`
+      Sorting the stack using extra space
+
+    - `26_max_min_window.py`
+      Calculating the maximum of minimums of each window of the input array
+
+    - `27_celebrity_problem`
+      The celebrity problem using 2 approaches.
+      - Approach 1: Calculating indegree and outdegree of each person
+      - Approach 2: Using Adjaceny List
+
+    - `28_max_prod_LR.py`:
+      Calculating the product of maximum of left and right of the given input array.
 
 
-- Queues basic operations
-- Linked List Basic operations
-- Mergeable Stacks
 
-### Reference:
- - Aditya Verma YouTube Channel:
-    - Stacks: https://www.youtube.com/playlist?list=PL_z_8CaSLPWdeOezg68SKkeLN4-T_jNHd
