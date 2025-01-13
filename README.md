@@ -1,10 +1,9 @@
 ### TODO:
 What is to be done and what's left.
-
-
-- Queues basic operations
-- Linked List Basic operations
-- Mergeable Stacks
+- Graphs.
+- Cracking Coding Interview Book Questions.
+- Some Easy, Medium and Hard problems on GeeksForGeeks.
+ 
 
 ### Reference:
  - Aditya Verma YouTube Channel:
