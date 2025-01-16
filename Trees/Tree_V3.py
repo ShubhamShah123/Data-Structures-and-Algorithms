@@ -26,34 +26,46 @@ def MorrisTraversal(root: Node):
 		return output
 
 class BSTIterator:
-    def __init__(self, root: Node, reverse: bool):
-        self.stack = Stack()
-        self.reverse = reverse
-        self.pushAll(root, reverse)
+	def __init__(self, root: Node, reverse: bool):
+		self.stack = Stack()
+		self.reverse = reverse
+		self.pushAll(root, reverse)
 
-    def next(self) -> int:
-        topStack = self.stack.pop()
-        if not self.reverse:
-            self.pushAll(topStack.right, False)
-        else:
-            self.pushAll(topStack.left, True)
-        return topStack.val
+	def next(self) -> int:
+		topStack = self.stack.pop()
+		if not self.reverse:
+			self.pushAll(topStack.right, False)
+		else:
+			self.pushAll(topStack.left, True)
+		return topStack.val
 
-    def hasNext(self) -> bool:
-        return not self.stack.is_empty()
+	def hasNext(self) -> bool:
+		return not self.stack.is_empty()
 
-    def pushAll(self, root: Node, reverse: bool):
-        while root is not None:
-            self.stack.push(root)
-            root = root.right if reverse else root.left
+	def pushAll(self, root: Node, reverse: bool):
+		while root is not None:
+			self.stack.push(root)
+			root = root.right if reverse else root.left
 
-    def printStack(self):
-        print([node.val for node in self.stack.stack])
+	def printStack(self):
+		print([node.val for node in self.stack.stack])
 
 
-class BinarySearchTree:
+
+class NodeValue:
+	def __init__(self, maxSize, maxNode, minNode):
+		self.maxSize = maxSize
+		self.maxNode = maxNode
+		self.minNode = minNode
+
+
+class BinarySearchTree():
 	def __init__(self):
 		print("[+] Binary Search Trees.")
+		self.first = None
+		self.last = None
+		self.middle = None
+		self.prev = Node(-float('inf'))  # Initialize prev with a very small value
 
 	def SearchBinaryTree(self, root: Node, searchNode: int):
 		while root is not None and root.val != searchNode:
@@ -230,3 +242,59 @@ class BinarySearchTree:
 			else:
 				root = root.left
 		return pred
+	
+	def RecoverBST(self, root: Node):
+		self.inorder(root)
+		if self.first and self.last:
+			# Non-adjacent swapped nodes
+			self.first.val, self.last.val = self.last.val, self.first.val
+		elif self.first and self.middle:
+			# Adjacent swapped nodes
+			self.first.val, self.middle.val = self.middle.val, self.first.val
+
+	def inorder(self, root: Node):
+		if not root:
+			return
+		# Recursive left traversal
+		self.inorder(root.left)
+		# Detect swapped nodes
+		if root.val < self.prev.val:
+			if self.first is None:
+				# First time encountering an anomaly
+				self.first = self.prev
+				self.middle = root
+			else:
+				# Second time encountering an anomaly
+				self.last = root
+		# Update prev node
+		self.prev = root
+		# Recursive right traversal
+		self.inorder(root.right)
+
+	def LargestBST(self, root: Node) -> NodeValue:
+		return self.LargestBSTHelper(root)
+	
+	def LargestBSTHelper(self, root: Node) -> NodeValue:
+		if not root:
+			return NodeValue(0, float('inf'), -float('inf'))
+
+		left = self.LargestBSTHelper(root.left)
+		right = self.LargestBSTHelper(root.right)
+
+		# Debug prints
+		# print(f"Root: {root.val}, Left maxNode: {left.maxNode}, Right minNode: {right.minNode}")
+
+		if left.maxNode < root.val < right.minNode:
+			# print(f"Valid BST at Root: {root.val}, Size: {left.maxSize + right.maxSize + 1}")
+			return NodeValue(
+				left.maxSize + right.maxSize + 1,
+				min(root.val, left.minNode),
+				max(root.val, right.maxNode)
+			)
+
+		# print(f"Invalid BST at Root: {root.val}, Taking maxSize from children")
+		return NodeValue(
+			max(left.maxSize, right.maxSize),
+			float('-inf'),
+			float('inf')
+		)
