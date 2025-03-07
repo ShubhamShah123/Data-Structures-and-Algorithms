@@ -11,3 +11,4 @@ What is to be done and what's left.
  - takeUForward YouTube Channel:
     - Trees: https://youtube.com/playlist?list=PLgUwDviBIf0q8Hkd7bK2Bpryj2xVJk8Vk&si=lRZMqVRK8aP9ew6_
     - Graphs: https://www.youtube.com/playlist?list=PLgUwDviBIf0oE3gA41TKO2H5bHpPd7fzn
+    - LinkedLists: https://www.youtube.com/playlist?list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU
